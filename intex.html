@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material para Evaluación de Unidad — Ingeniería de Prompt</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                        },
+                        darkbg: '#0f172a',
+                        darkcard: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons & Chart.js -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); }
+        .dark .glass { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-darkbg dark:text-slate-100 transition-colors duration-300 min-h-screen">
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-slate-200 dark:bg-slate-800 z-50">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-teal-500 to-emerald-500 w-0 transition-all duration-150"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 w-full glass border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-500 flex items-center justify-center text-white font-bold shadow-md shadow-teal-500/20">
+                    IM
+                </div>
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-teal-600 dark:text-teal-400 block">Evaluación de Unidad</span>
+                    <span class="text-sm font-bold text-slate-900 dark:text-white">Ingeniería de Prompt</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <a href="#resumen" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Resumen</a>
+                <a href="#investigacion" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Investigación</a>
+                <a href="#prospectiva" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Prospectiva</a>
+                <a href="#bitacora" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Bitácora Prompts</a>
+                <a href="#educacion" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Educación</a>
+                <a href="#apa" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Referencias APA</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5 hidden"></i>
+                    <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO / PORTADA SECCIÓN FULL-WIDTH -->
+    <section class="relative overflow-hidden pt-20 pb-24 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20 mb-6">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    Producto de Evaluación Académica
+                </span>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                    Material para evaluación de unidad <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-emerald-400">Ingeniería de Prompt</span>
+                </h1>
+                
+                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                    Compendio integral sobre la integración de la Inteligencia Artificial en el sector empresarial, auditoría técnica de prompts, análisis de habilidades futuras y marco educativo en la era digital.
+                </p>
+
+                <div class="p-6 rounded-2xl bg-slate-800/80 border border-slate-700/60 backdrop-blur-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Autor del Proyecto</p>
+                        <p class="text-xl font-bold text-white mt-0.5">Imanol Maldonado Villaseñor</p>
+                    </div>
+                    <div class="h-8 w-px bg-slate-700 hidden sm:block"></div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Asignatura</p>
+                        <p class="text-sm font-medium text-teal-400 mt-0.5">Ingeniería de Prompt & Sistemas Inteligentes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+        <section id="resumen" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">1. Resumen Ejecutivo</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-4 text-slate-600 dark:text-slate-300 text-justify leading-relaxed">
+                    <p>
+                        La Inteligencia Artificial (IA) ha dejado de ser una herramienta experimental para convertirse en el <strong>sistema operativo central de las empresas modernas</strong>. Las organizaciones están reestructurando sus cadenas de valor para impulsar ingresos, reducir costos mediante automatización autónoma y multiplicar la productividad del talento humano.
+                    </p>
+                    <p>
+                        A través de este documento se consolidan los hallazgos referentes al impacto de la IA en los modelos de negocio, la atención al cliente, la gestión logística y la proyección macroeconómica hacia los próximos 5-10 años. Asimismo, se presenta una <strong>auditoría metódica de ingeniería de prompt</strong> sobre las interacciones generadas durante esta evaluación.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-teal-50 dark:bg-slate-800/80 border border-teal-100 dark:border-slate-700 space-y-4">
+                    <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-teal-600 dark:text-teal-400"></i>
+                        Puntos Clave del Compendio
+                    </h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-teal-500 mt-2 shrink-0"></span>
+                            <span><strong>Impacto Operativo:</strong> Aumento del ROI con hiperpersonalización y mantenimiento predictivo (hasta 50% menos paradas).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-teal-500 mt-2 shrink-0"></span>
+                            <span><strong>Transformación Laboral:</strong> Evolución hacia puestos "aumentados" con enfoque en orquestación de IA y pensamiento crítico.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-teal-500 mt-2 shrink-0"></span>
+                            <span><strong>Empresa Agéntica:</strong> Prospectiva a 10 años enfocada en enjambres autónomos y cobro por resultados (Outcome-Based).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: INVESTIGACIÓN INTEGRAL -->
+        <section id="investigacion" class="scroll-mt-24 space-y-12">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                    <i data-lucide="building-2" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">2. Investigación Integral: La IA en las Empresas</h2>
+            </div>
+
+            <!-- Usos por Área -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Atención & Clientes</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Chatbots conversacionales 24/7 con PLN, análisis de sentimiento proactivo y resolución autónoma de solicitudes complejas.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+                        <i data-lucide="trending-up" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Marketing & Ventas</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Recomendaciones personalizadas (Amazon/Netflix), precios dinámicos en tiempo real y micro-targeting publicitario.
+                    </p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+                        <i data-lucide="cpu" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Operaciones & Cadena</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Mantenimiento predictivo industrial mediante IoT, predicción de inventarios y logística con optimización de rutas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Matriz de Ventajas y Riesgos -->
+            <div class="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-darkcard">
+                <div class="p-6 border-b border-slate-200 dark:border-slate-800">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white">Matriz de Impacto: Ventajas vs. Desventajas / Riesgos</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">
+                            <tr>
+                                <th class="p-4">Dimensión</th>
+                                <th class="p-4 text-emerald-600 dark:text-emerald-400">Ventajas Clave</th>
+                                <th class="p-4 text-rose-600 dark:text-rose-400">Desventajas / Riesgos</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-300">
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900 dark:text-white">Operaciones</td>
+                                <td class="p-4">Ejecución continua sin fatiga, automatización de tareas repetitivas.</td>
+                                <td class="p-4">Interrupción por fallas en el sistema o alucinaciones de datos.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900 dark:text-white">Finanzas</td>
+                                <td class="p-4">Optimización de presupuestos y prevención de fraudes en tiempo real.</td>
+                                <td class="p-4">Elevados costos de implementación e infraestructura en la nube.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900 dark:text-white">Talento Humano</td>
+                                <td class="p-4">Aumento del rendimiento enfocado en actividades estratégicas.</td>
+                                <td class="p-4">Desplazamiento laboral y necesidad de re-capacitación masiva.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gráfico de Habilidades Futuras -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800">
+                <h3 class="font-bold text-lg mb-2 text-slate-900 dark:text-white">Demanda de Competencias en la Era de la IA (Perspectiva Laboral)</h3>
+                <p class="text-xs text-slate-500 mb-6">Estimación de cambio en la relevancia de habilidades requeridas por empresas para 2026-2030.</p>
+                <div class="h-64">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: PROSPECTIVA 5-10 AÑOS -->
+        <section id="prospectiva" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                    <i data-lucide="rocket" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">3. Prospectiva: La Empresa Agéntica (2030-2035)</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-slate-900 text-white border border-slate-800">
+                    <div class="text-teal-400 text-sm font-bold mb-2">01. Autonomía</div>
+                    <h3 class="font-bold text-base mb-2">Enjambres Agénticos</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Redes de agentes de IA coordinados ejecutando compras, contratos y campañas de extremo a extremo.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 text-white border border-slate-800">
+                    <div class="text-teal-400 text-sm font-bold mb-2">02. Estructura</div>
+                    <h3 class="font-bold text-base mb-2">Unicornios de 1 Persona</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Startups de miles de millones de dólares impulsadas por equipos de menos de 10 personas.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 text-white border border-slate-800">
+                    <div class="text-teal-400 text-sm font-bold mb-2">03. Finanzas</div>
+                    <h3 class="font-bold text-base mb-2">Outcome-Based Pricing</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Cobro de software basado estrictamente en el valor monetario o rendimiento financiero generado.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-slate-900 text-white border border-slate-800">
+                    <div class="text-teal-400 text-sm font-bold mb-2">04. Mercado</div>
+                    <h3 class="font-bold text-base mb-2">Comercio A2A</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Interacción comercial automatizada directa entre algoritmos de empresas compradoras y vendedoras.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: BITÁCORA DE PROMPTS Y AUDITORÍA DE INGENIERÍA DE PROMPT -->
+        <section id="bitacora" class="scroll-mt-24 space-y-8">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                    <i data-lucide="terminal" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">4. Bitácora de Prompts & Evaluación</h2>
+                    <p class="text-xs text-slate-500 mt-1">Auditoría técnica de los 10 prompts formulados por Imanol Maldonado Villaseñor.</p>
+                </div>
+            </div>
+
+            <!-- Gráfico de Evolución de Puntuaciones -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800">
+                <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-4">Curva de Evolución en la Calidad del Prompt (0 a 10 Puntos)</h3>
+                <div class="h-48">
+                    <canvas id="promptChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Tabla de Bitácora -->
+            <div class="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-darkcard shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs sm:text-sm">
+                        <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">
+                            <tr>
+                                <th class="p-4 w-12 text-center">#</th>
+                                <th class="p-4">Prompt Original Emitido</th>
+                                <th class="p-4">Asertividad</th>
+                                <th class="p-4">Completitud Ingenieril</th>
+                                <th class="p-4 text-center">Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-300">
+                            <tr>
+                                <td class="p-4 text-center font-bold">1</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">COMO USA LA IA LAS EMPRESAS</td>
+                                <td class="p-4">Media (Intención general clara)</td>
+                                <td class="p-4">Baja (Premisa muy abierta, sin formato ni rol)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600">6.0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">2</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">CUALES SON LAS VENTAJAS Y DESVENTAJAS Y RIESGS...</td>
+                                <td class="p-4">Media-Alta (Identifica 3 vectores)</td>
+                                <td class="p-4">Media (Buena agrupación, error tipográfico)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600">6.5</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">3</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">COMO USAN LAS GRANDES EMPRESAS LA IA PAR AUMENATR...</td>
+                                <td class="p-4">Alta (Delimita sujeto y 3 objetivos)</td>
+                                <td class="p-4">Alta (Estructura financiera clara)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">7.5</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">4</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">QUE IMPACTO TIENE LA IA EN LOS EMPLEADOS...</td>
+                                <td class="p-4">Alta (Focus en factor humano y laboral)</td>
+                                <td class="p-4">Alta (Multidimensional)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">7.5</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">5</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">COMO PUEDEN LAS EMPRESAS IMPLEMENTAR IA...</td>
+                                <td class="p-4">Alta (Ciclo de vida completo)</td>
+                                <td class="p-4">Muy Alta (De tecnología a cultura)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">8.0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">6</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">COMO ESTA CAMBIANDO LA IA LA RELACION ENTRE...</td>
+                                <td class="p-4">Alta (Ámbito cliente y 3 pilares)</td>
+                                <td class="p-4">Muy Alta (Acotación temática excelente)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">8.5</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">7</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">CUAL ES EL FUTURO DE LA IA EN LAS EMPRESAS...</td>
+                                <td class="p-4">Muy Alta (Prospectiva 5-10 años)</td>
+                                <td class="p-4">Excelente (Multidimensional y temporal)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">9.0</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">8</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">HAS UN RESUMEN EJECUTIVO DE TODO ESO</td>
+                                <td class="p-4">Alta (Meta-prompt de síntesis)</td>
+                                <td class="p-4">Media-Alta (Reutiliza el contexto previo)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">7.5</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">9</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">AHORA EXPLICALO COMO SI FUERA UN NIÑO DE 10 AÑOS</td>
+                                <td class="p-4">Excelente (Técnica ELI5 / Restricción de voz)</td>
+                                <td class="p-4">Alta (Adaptación de audiencia directa)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">8.5</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-center font-bold">10</td>
+                                <td class="p-4 font-mono text-xs text-teal-600 dark:text-teal-400">HAS UNA EXPLICACION DE EDUCACION COMO LICENCIATURA</td>
+                                <td class="p-4">Media-Alta (Solicita carrera específica)</td>
+                                <td class="p-4">Media (Un tanto escueto, sin estructura)</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600">7.0</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: EDUCACIÓN COMO LICENCIATURA -->
+        <section id="educacion" class="scroll-mt-24 space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">5. Marco Pedagógico: Licenciatura en Educación</h2>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800 space-y-4 text-slate-600 dark:text-slate-300 text-justify leading-relaxed">
+                <p>
+                    La <strong>Licenciatura en Educación</strong> es un programa académico superior orientado al estudio, diseño, gestión y evaluación de los procesos de enseñanza-aprendizaje. En la era digital, el profesional en educación evoluciona desde la enseñanza tradicional expositiva hacia el <strong>Diseño Instruccional, la Gestión EdTech y la Facilitación del Aprendizaje Autónomo</strong>.
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4 pt-4">
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                        <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">Sector Corporativo</h4>
+                        <p class="text-xs">Capacitación de talento, desarrollo e-learning y educación continua en empresas.</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                        <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">Tecnología EdTech</h4>
+                        <p class="text-xs">Creación de experiencias interactivas y diseño de entornos virtuales adaptativos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: REFERENCIAS APA 2020 -->
+        <section id="apa" class="scroll-mt-24 space-y-6">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                    <i data-lucide="book-open" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">6. Referencias Bibliográficas (APA 7ª Ed.)</h2>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-white dark:bg-darkcard border border-slate-200 dark:border-slate-800 space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                <p class="pl-6 -indent-6">Agrawal, A., Gans, J., & Goldfarb, A. (2018). <em>Prediction machines: The simple economics of artificial intelligence</em>. Harvard Business Review Press.</p>
+                <p class="pl-6 -indent-6">Brynjolfsson, E., Li, D., & Raymond, L. R. (2023). <em>Generative AI at work</em> (NBER Working Paper No. w31161). National Bureau of Economic Research. https://doi.org/10.3386/w31161</p>
+                <p class="pl-6 -indent-6">Davenport, T. H., & Mittal, N. (2022). <em>All-in on AI: How smart companies win big with artificial intelligence</em>. Harvard Business Review Press.</p>
+                <p class="pl-6 -indent-6">McKinsey & Company. (2023). <em>The economic potential of generative AI: The next productivity frontier</em>. McKinsey Global Institute.</p>
+                <p class="pl-6 -indent-6">Russell, S., & Norvig, P. (2020). <em>Artificial intelligence: A modern approach</em> (4th ed.). Pearson.</p>
+                <p class="pl-6 -indent-6">World Economic Forum. (2023). <em>The future of jobs report 2023</em>. World Economic Forum.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-darkcard py-8 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <p>© 2026 Imanol Maldonado Villaseñor — Material para evaluación de unidad Ingeniería de Prompt.</p>
+            <p>Configurado para despliegue automático en GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT INTERACTIVO Y GRÁFICOS -->
+    <script>
+        // Inicializar Lucide Icons
+        lucide.createIcons();
+
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-icon-dark');
+        const lightIcon = document.getElementById('theme-icon-light');
+
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+        });
+
+        // Reading Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Chart 1: Habilidades
+        const ctxSkills = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctxSkills, {
+            type: 'bar',
+            data: {
+                labels: ['Pensamiento Crítico', 'Ingeniería Prompts', 'AI Literacy', 'Creatividad', 'Empatía', 'Procesamiento Datos'],
+                datasets: [{
+                    label: 'Relevancia Futura (%)',
+                    data: [95, 90, 88, 85, 82, 40],
+                    backgroundColor: ['#10b981', '#10b981', '#059669', '#3b82f6', '#3b82f6', '#ef4444'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+
+        // Chart 2: Prompts Score
+        const ctxPrompt = document.getElementById('promptChart').getContext('2d');
+        new Chart(ctxPrompt, {
+            type: 'line',
+            data: {
+                labels: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7', 'P8', 'P9', 'P10'],
+                datasets: [{
+                    label: 'Calificación del Prompt (0-10)',
+                    data: [6.0, 6.5, 7.5, 7.5, 8.0, 8.5, 9.0, 7.5, 8.5, 7.0],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { min: 5, max: 10 } }
+            }
+        });
+    </script>
+</body>
+</html>
